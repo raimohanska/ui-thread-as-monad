@@ -65,4 +65,15 @@ blockingContext = Context id id
 
 This would execute everything synchronously.
 
+The only actually working example so far is in `ConsoleExample.hs`:
 
+~~~ .haskell
+main = do
+  inUIThread blockingContext $ do
+    blocking $ putStrLn "Enter your name : "
+    name <- blocking $ getLine
+    blocking $ putStrLn $ "Hello, " ++ name
+~~~
+
+It's really pathetic though: it's just performing IO actions in a
+blocking way. Anyways it demonstrates that the UI Monad actually does something...
