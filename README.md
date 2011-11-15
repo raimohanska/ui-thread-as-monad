@@ -49,4 +49,18 @@ operations can be run using the `background` function that runs your IO
 operations using a threadpool (or such) and then runs the next UI action
 in the UI thread again.
 
+Note that the UI Monad is fully functional: You can run UI actions using
+the `inUiThread` function. The only catch here is that you have to
+provide it with a `Context` which is practically a pair of functions:
+one to submit a IO action to be run in the UI thread and other for
+running an action on the background.
+
+The simplest possible context would be
+
+~~~ .haskell
+blockingContext = Context id id
+~~~
+
+This would execute everything synchronously.
+
 
