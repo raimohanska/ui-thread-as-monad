@@ -47,7 +47,9 @@ The actions (on each line) would be un in the UI thread, each as
 its own "event", without blocking the thread in between. Background
 operations can be run using the `background` function that runs your IO
 operations using a threadpool (or such) and then runs the next UI action
-in the UI thread again.
+in the UI thread again. The `blocking` function can be used to run any
+IO action in the UI thread. I figured the name should be shouting aloud
+"I'll be blocking your UI thread if you get stupid".
 
 Note that the UI Monad is fully functional: You can run UI actions using
 the `inUiThread` function. The only catch here is that you have to
