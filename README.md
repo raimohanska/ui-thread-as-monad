@@ -1,7 +1,7 @@
 UI Thread as Monad
 ==================
 
-I got this digusted feeling when writing Android apps where you'll be
+I got this disgusted feeling when writing Android apps where I was
 doing
 
 ~~~ .java
@@ -50,6 +50,11 @@ operations using a threadpool (or such) and then runs the next UI action
 in the UI thread again. The `blocking` function can be used to run any
 IO action in the UI thread. I figured the name should be shouting aloud
 "I'll be blocking your UI thread if you get stupid".
+
+The UI Monad can be thought as a way of using monads as "programmable semicolons". You can write code that looks like a sequence of actions that are executed synchronously, yet the programmable (invisible) semicolons decouple your actions into the UI thread. I find at least a couple of great things about this design:
+
+- Minimal boilerplate: shifting between execution modes is easy using `background` and `blocking` functions
+- No way to accidentally run stuff in the wrong thread: when you're in the UI monad, your code is run in the UI thread. Background running and blocking calls need explicit `background` or `blocking` calls
 
 Note that the UI Monad is fully functional: You can run UI actions using
 the `inUiThread` function. The only catch here is that you have to
