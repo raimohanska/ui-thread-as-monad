@@ -16,7 +16,7 @@ new Thread() {
 when putting something on the background and
 
 ~~~ .java 
-runInUIThread(new Runnable() {
+runOnUiThread(new Runnable() {
   public void run() {
   // ...
   }
@@ -36,6 +36,7 @@ twitterWiz :: UI ()
 twitterWiz = do
   name <- alert "what's your twitter username?"
   tweets <- background $ queryTwitter name
+  blocking $ putStrLn "Got " ++ show tweets
   showTweets tweets
 
 alert :: UI String
